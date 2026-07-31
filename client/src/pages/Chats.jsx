@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:5000');
+const socket = io('https://blu-social.onrender.com');
 
 export default function Chats() {
   const { user } = useContext(AuthContext);
@@ -12,7 +12,7 @@ export default function Chats() {
   const [text, setText] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/users/connections/${user.id}`)
+    fetch(`https://blu-social.onrender.com/api/users/connections/${user.id}`)
       .then(res => res.json())
       .then(data => setConnections(data))
       .catch(err => console.error(err));
@@ -20,7 +20,7 @@ export default function Chats() {
 
   useEffect(() => {
     if (activeChat) {
-      fetch(`http://localhost:5000/api/messages/${user.id}/${activeChat._id}`)
+      fetch(`https://blu-social.onrender.com/api/messages/${user.id}/${activeChat._id}`)
         .then(res => res.json())
         .then(data => setMessages(data))
         .catch(err => console.error(err));
