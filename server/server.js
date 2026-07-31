@@ -26,6 +26,11 @@ mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/blu-social'
   .then(() => console.log('MongoDB Connected Successfully'))
   .catch(err => console.error('MongoDB Connection Error:', err));
 
+// --- ROOT ROUTE (Fixes Cannot GET / error) ---
+app.get('/', (req, res) => {
+  res.status(200).send('Blu Social API is live and operational!');
+});
+
 // --- AUTHENTICATION ROUTES ---
 app.post('/api/auth/register', async (req, res) => {
   try {
@@ -161,7 +166,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('call_user', (data) => {
-    io.to(data.to).chno('incoming_call', { signal: data.signalData, from: data.from, name: data.name, type: data.type });
+    io.to(data.to).emit('incoming_call', { signal: data.signalData, from: data.from, name: data.name, type: data.type });
   });
 
   socket.on('answer_call', (data) => {
