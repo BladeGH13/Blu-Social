@@ -8,7 +8,7 @@ export default function Discovery() {
   const [connectedPopup, setConnectedPopup] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/users/discover/${user.id}`)
+    fetch(`https://blu-social.onrender.com/api/users/discover/${user.id}`)
       .then(res => res.json())
       .then(data => setProfiles(data))
       .catch(err => console.error(err));
@@ -17,7 +17,7 @@ export default function Discovery() {
   const handleSwipe = async (direction) => {
     const currentProfile = profiles[currentIndex];
     if (direction === 'right' && currentProfile) {
-      await fetch('http://localhost:5000/api/users/connect', {
+      await fetch('https://blu-social.onrender.com/api/users/connect', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ userId: user.id, targetId: currentProfile._id })
