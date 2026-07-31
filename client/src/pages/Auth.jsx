@@ -18,7 +18,10 @@ export default function Auth() {
       return;
     }
 
-    const endpoint = isLogin ? 'http://localhost:5000/api/auth/login' : 'http://localhost:5000/api/auth/register';
+    const endpoint = isLogin 
+      ? 'https://blu-social.onrender.com/api/auth/login' 
+      : 'https://blu-social.onrender.com/api/auth/register';
+
     try {
       const res = await fetch(endpoint, {
         method: 'POST',
