@@ -12,7 +12,7 @@ export default function AddFriend() {
     setError('');
     setSearchResult(null);
     try {
-      const res = await fetch(`http://localhost:5000/api/users/search?query=${encodeURIComponent(searchQuery)}`);
+      const res = await fetch(`https://blu-social.onrender.com/api/users/search?query=${encodeURIComponent(searchQuery)}`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.error);
       setSearchResult(data);
@@ -22,7 +22,7 @@ export default function AddFriend() {
   };
 
   const handleAdd = async (targetId) => {
-    await fetch('http://localhost:5000/api/users/connect', {
+    await fetch('https://blu-social.onrender.com/api/users/connect', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userId: user.id, targetId })
